@@ -1,0 +1,85 @@
+{% load staticfiles %}
+{% load static %} 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mais detalhes da notícia</title>
+    <link rel="stylesheet" href="{% static 'css/uikit.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/uikit.min.js' %}"></script>
+    <script src="{% static 'js/uikit-icons.min.js' %}"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="app-header">
+        <a href="{% url 'home' %}" class="btn-home">
+            <span uk-icon="icon: chevron-left; ratio: 2"></span> Home
+        </a>
+
+        <h2 class="title"><span uk-icon="icon: nut; ratio: 2"></span> Fake News Br</h2>
+    </header>
+
+    <section class="uk-section">
+        <article class="uk-container uk-article">
+            <h1 class="uk-article-title">{{ post.name }}</h1>
+            <h3 class="text-light">{{ post.resumo }}</h3>
+
+            <figure>
+                <img data-src="/static{{ post.imageurl.url }}" alt="{{ post.name }}" width="1200" height="600" alt="" uk-img />
+            </figure>
+
+            <p>{{ post.content }}</p>
+        </article>
+    </section>
+
+    <div class="uk-section uk-section-muted">
+        <aside class="uk-container">
+            <h3>Deixe seu comentário</h3>
+            
+            <form class="form uk-form-stacked" method="POST">
+                {% csrf_token %}
+                {{ form }}
+                
+                <div class="uk-margin">
+                    <input type="hidden" name="blog" value="{{ post.id }}">
+                    <button class="uk-button uk-button-primary" type="submit">ENVIAR COMENTÁRIO</button>
+                </div>
+
+            </form>
+        </aside>
+
+        <section class="uk-container">
+            <br /><h3>Comentários</h3>
+
+            <ul class="uk-comment-list">
+                <li>
+                    <article class="uk-comment">
+                        <header class="uk-comment-header uk-position-relative">
+                            <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                                <div class="uk-width-auto">
+                                    <span uk-icon="icon: user; ratio: 2"></span>
+                                </div>
+                                <div class="uk-width-expand">
+                                    <h4 class="uk-comment-title uk-margin-remove">Amanda Cooper</h4>
+                                    <p class="uk-comment-meta uk-margin-remove-top">há 12 dias</p>
+                                </div>
+                            </div>
+                        </header>
+
+                        <div class="uk-comment-body">
+                            <p>Sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    
+</body>
+</html>

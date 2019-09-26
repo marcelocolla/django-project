@@ -1,0 +1,66 @@
+
+body, h1, .uk-heading-divider {
+    font-family: 'Montserrat', 'Arial Narrow', Arial, serif;
+}
+
+.app-header {
+    background-color: #1e87f0;
+    padding: 16px 4px;
+    display: flex;
+    align-items: center;
+}
+.app-header .title {
+    margin: 0 auto;
+    color: #fff;
+    font-size: 28px;
+    font-family: 'Montserrat', 'Arial Narrow', Arial, serif;
+    font-weight: bold;
+    text-align: center;
+    flex: 1;
+}
+.app-header .btn-home {
+    color: #fff;
+    text-decoration: none;
+    line-height: 24px;
+    opacity: 0.8;
+    transition: all 0.2s ease-out;
+    font-size: 12px;
+}
+.app-header .btn-home:hover {
+    color: #222;
+}
+
+@media all and (min-width: 600px) {
+    .app-header {
+        padding: 24px;
+    }
+    .app-header .title {
+        font-size: 36px;
+    }
+    .app-header .btn-home {
+        font-size: 16px;
+    }
+} 
+
+/* Article */
+.uk-article .text-light { 
+    color: #999;
+}
+
+.form label {
+    display: block;
+    padding-bottom: 4px;
+}
+
+.form input,
+.form textarea {
+    padding: 12px 16px;
+    display: inline-block;
+    min-width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+}
+
+.form input {
+    margin-bottom: 20px;
+}

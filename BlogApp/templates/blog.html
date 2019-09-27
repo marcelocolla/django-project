@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/uikit.min.js' %}"></script>
     <script src="{% static 'js/uikit-icons.min.js' %}"></script>
-
+    
     <link href="https://fonts.googleapis.com/css?family=Montserrat:600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -26,14 +26,26 @@
 
     <section class="uk-section">
         <article class="uk-container uk-article">
-            <h1 class="uk-article-title">{{ post.name }}</h1>
+            <h1 class="uk-article-title">{{ post.titulo }}</h1>
             <h3 class="text-light">{{ post.resumo }}</h3>
 
-            <figure>
-                <img data-src="/static{{ post.imageurl.url }}" alt="{{ post.name }}" width="1200" height="600" alt="" uk-img />
-            </figure>
+            <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="animation: pull">
+                <ul class="uk-slideshow-items">
+                    <li>
+                        <img src="/static{{ post.image1.url }}" alt="{{ post.name }}" alt="" uk-cover />
+                    </li>
+                    {% if post.image2.url %}
+                    <li>
+                        <img src="/static{{ post.image2.url }}" alt="{{ post.name }}" alt="" uk-cover />
+                    </li>
+                    {% endif %}
+                </ul>
 
-            <p>{{ post.content }}</p>
+                <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+                <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+            </div>
+
+            <p>{{ post.content|linebreaks }}</p>
         </article>
     </section>
 
@@ -46,17 +58,19 @@
                 {{ form }}
                 
                 <div class="uk-margin">
-                    <input type="hidden" name="blog" value="{{ post.id }}">
+                    <!-- <input type="hidden" name="blog" value="{{ post.id }}"> -->
                     <button class="uk-button uk-button-primary" type="submit">ENVIAR COMENTÁRIO</button>
                 </div>
 
             </form>
         </aside>
 
+        {% if listComments %}
         <section class="uk-container">
-            <br /><h3>Comentários</h3>
+            <br /><h3><b>Comentários</b></h3>
 
             <ul class="uk-comment-list">
+                {% for comment in listComments %}
                 <li>
                     <article class="uk-comment">
                         <header class="uk-comment-header uk-position-relative">
@@ -65,21 +79,22 @@
                                     <span uk-icon="icon: user; ratio: 2"></span>
                                 </div>
                                 <div class="uk-width-expand">
-                                    <h4 class="uk-comment-title uk-margin-remove">Amanda Cooper</h4>
-                                    <p class="uk-comment-meta uk-margin-remove-top">há 12 dias</p>
+                                    <h4 class="uk-comment-title uk-margin-remove"><b>{{ comment.nome }}</b></h4>
+                                    <p class="uk-comment-meta uk-margin-remove-top"><span uk-icon="icon: calendar"></span> em <i>{{ comment.createAt }}</i></p>
                                 </div>
                             </div>
                         </header>
 
                         <div class="uk-comment-body">
-                            <p>Sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                            <p>{{ comment.mensagem }}</p>
                         </div>
                     </article>
                 </li>
+                {% endfor %}
             </ul>
         </section>
+        {% endif %}
     </div>
-
     
 </body>
 </html>

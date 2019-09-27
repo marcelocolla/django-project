@@ -28,12 +28,12 @@
             {% for post in listBlog %}
             <article class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
                 <figure class="uk-card-media-left uk-cover-container">
-                    <img src="/static{{ post.imageurl.url }}" alt="{{ post.name }}" uk-cover>
+                    <img src="/static{{ post.image1.url }}" alt="{{ post.name }}" uk-cover>
                     <canvas width="200" height="200"></canvas>
                 </figure>
 
                 <header class="uk-card-body">
-                    <h3 class="uk-card-title"><b>{{ post.name }}</b></h3>
+                    <h3 class="uk-card-title"><b>{{ post.titulo }}</b></h3>
                     <p>{{ post.resumo }}</p>
                     <a href="{% url 'blog' post.id %}" class="uk-button uk-button-primary">Leia mais</a>
                 </header>
